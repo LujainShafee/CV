@@ -1,0 +1,1131 @@
+<!-- STREAMING_CHUNK: Setting up the layout core and importing professional fonts... -->
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lujain | Cyber Security Specialist & SOC Analyst</title>
+    <!-- استدعاء الخطوط السيبرانية والنقية المتوافقة مع العربية والإنجليزية -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=JetBrains+Mono:wght@700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <!-- STREAMING_CHUNK: Implementing boot-up script to force dark theme immediately before flash... -->
+    <script>
+        // تفعيل الثيم الأسود فوراً عند البداية لتجنب وميض اللون الأبيض غير المرغوب قبل وميض الإقلاع الفعلي
+        document.documentElement.setAttribute('data-theme', 'dark');
+    </script>
+ 
+    <style>
+        /* STREAMING_CHUNK: Designing CSS Custom Variables for Dual-Theme System (Light/Dark)... */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+ 
+        :root {
+            --bg-main: #ffffff;       /* خلفية بيضاء ناصعة */
+            --bg-card: rgba(248, 250, 252, 0.75); /* بطاقات فاتحة ومميزة */
+            --cyber-blue: #0284c7;    /* الأزرق السيبراني الأساسي */
+            --cyber-blue-glow: rgba(2, 132, 199, 0.25);
+            --text-dark: #0f172a;     
+            --text-muted: #475569;    
+            --border-glass: rgba(15, 23, 42, 0.09); /* تحديد زجاجي خفيف وهادئ افتراضياً */
+            --grid-color: rgba(15, 23, 42, 0.06);
+            --terminal-bg: #1e293b;
+            --terminal-text: #38bdf8;
+            --shadow-custom: rgba(15, 23, 42, 0.03);
+        }
+ 
+        /* متغيرات الألوان للوضع السيبراني الداكن */
+        [data-theme="dark"] {
+            --bg-main: #0b0f19;       /* لون أسود سيبراني عميق */
+            --bg-card: rgba(17, 24, 39, 0.75); /* بطاقات بلورية داكنة */
+            --cyber-blue: #38bdf8;    /* أزرق مشع متوهج */
+            --cyber-blue-glow: rgba(56, 189, 248, 0.35);
+            --text-dark: #f8fafc;     
+            --text-muted: #94a3b8;    
+            --border-glass: rgba(248, 250, 252, 0.1); 
+            --grid-color: rgba(56, 189, 248, 0.04); /* شبكة متوهجة زرقاء شفافة */
+            --terminal-bg: #030712;
+            --terminal-text: #4ade80; /* لون الخط الأخضر السيبراني الافتراضي */
+            --shadow-custom: rgba(0, 0, 0, 0.4);
+        }
+ 
+        body {
+            background-color: var(--bg-main);
+            /* الخطوط المربعة المتقاطعة باللون الأسود الشفاف الهادئ */
+            background-image: linear-gradient(var(--grid-color) 1.5px, transparent 1.5px),
+                              linear-gradient(90deg, var(--grid-color) 1.5px, transparent 1.5px);
+            background-size: 45px 45px;
+            color: var(--text-dark);
+            line-height: 1.7; 
+            font-family: 'Cairo', sans-serif;
+            transition: background-color 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+                        color 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+                        background-image 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+ 
+        h2, h3, .logo-container, .timeline-date, .node-vendor {
+            font-family: 'Space Grotesk', 'Cairo', sans-serif;
+        }
+ 
+        /* STREAMING_CHUNK: Designing the layout and navigation bar elements... */
+        header {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-glass);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 40;
+            transition: background 0.4s ease, border-color 0.4s ease;
+        }
+ 
+        [data-theme="dark"] header {
+            background: rgba(11, 15, 25, 0.85);
+        }
+ 
+        .nav-container {
+            display: flex;
+            justify-content: space-between; 
+            align-items: center;
+            max-width: 1000px; 
+            margin: 0 auto;
+            padding: 12px 30px; 
+        }
+ 
+        nav {
+            order: 1; 
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+ 
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 16px;
+            direction: ltr; 
+        }
+ 
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 14px; 
+            transition: all 0.3s ease;
+        }
+ 
+        nav ul li a:hover {
+            color: var(--cyber-blue);
+        }
+ 
+        /* زر التحكم في وضع القراءة المطور */
+        .theme-toggle-btn {
+            background: none;
+            border: 1px solid var(--border-glass);
+            color: var(--text-dark);
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+ 
+        .theme-toggle-btn:hover {
+            border-color: var(--cyber-blue);
+            box-shadow: 0 0 10px var(--cyber-blue-glow);
+            transform: scale(1.05);
+        }
+ 
+        .theme-toggle-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+ 
+        .logo-container {
+            order: 2; 
+            display: flex;
+            align-items: center;
+            font-size: 15px; 
+            font-weight: 500;
+            letter-spacing: 1px;
+            color: var(--text-dark);
+            gap: 4px;
+            direction: ltr; 
+        }
+ 
+        .blink-dot {
+            color: var(--cyber-blue);
+            animation: blink 1s step-end infinite;
+            font-family: 'JetBrains Mono', monospace;
+        }
+ 
+        @keyframes blink {
+            from, to { color: transparent }
+            50% { color: var(--cyber-blue); }
+        }
+ 
+        /* STREAMING_CHUNK: Structuring the Hero Section layout with slightly larger terminal on left... */
+        .hero {
+            padding: 110px 20px 20px 20px; 
+            max-width: 1000px; 
+            margin: 0 auto;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+            text-align: right;
+        }
+ 
+        .hero-text {
+            flex: 1.25;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* محاذاة عناصر النص لليمين */
+        }
+ 
+        .hero-image {
+            flex: 0.75;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 90%;
+            max-width: 320px; /* تكبير حجم المربع بشكل بسيط ومدروس */
+        }
+ 
+        /* Badge حركي تفاعلي بآلة كاتبة */
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(15, 23, 42, 0.04);
+            border: 1.2px solid var(--border-glass);
+            color: var(--cyber-blue);
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 8px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-family: 'Space Grotesk', sans-serif;
+            overflow: hidden;
+            border-right: 2px solid var(--cyber-blue);
+            white-space: nowrap;
+            animation: typewriter 3.5s steps(30, end) infinite, blink 0.75s step-end infinite;
+        }
+ 
+        @keyframes typewriter {
+            from { width: 0 }
+            to { width: 160px; }
+        }
+ 
+        .hero h1 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 50px; 
+            font-weight: 1000;
+            color: var(--text-dark);
+            letter-spacing: -2px;
+            line-height: 1.1;
+            margin-bottom: 10px;
+            text-align: right;
+            animation: fadeInRight 1s ease-out;
+        }
+ 
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+ 
+        .hero h2 {
+            font-size: 16px; 
+            font-weight: 500;
+            color: var(--cyber-blue);
+            margin-bottom: 15px;
+            text-align: right;
+        }
+ 
+        .hero p {
+            font-size: 14px; 
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+ 
+        .cta-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+ 
+        /* Container & Sections */
+        .container {
+            max-width: 600px; 
+            margin: 0 auto;
+            padding: 30px 40px 30px 20px; 
+            text-align: right;
+        }
+ 
+        /* العناوين مع تأثير وميض الخط الأزرق */
+        .section-header-tech {
+            font-size: 15px; 
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+            display: inline-flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 8px;
+            width: 100%;
+        }
+ 
+        .section-header-tech::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 16px;
+            background-color: var(--cyber-blue);
+            border-radius: 2px;
+            animation: pulse-glow 1.8s infinite ease-in-out; 
+        }
+ 
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.3; cubic-bezier(0.4, 0, 0.6, 1); }
+            50% { opacity: 1; box-shadow: 0 0 8px var(--cyber-blue); }
+        }
+ 
+        /* STREAMING_CHUNK: Implementing the Glassmorphic card design defaults... */
+        .glass-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(56px);
+            border: 1.5px solid var(--border-glass); /* تحديد زجاجي هادئ افتراضي */
+            padding: 16px; 
+            border-radius: 10px;
+            box-shadow: 0 4px 12px var(--shadow-custom);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            text-align: right;
+        }
+ 
+        .glass-card:hover {
+            transform: translateY(-5px); 
+            border-color: var(--cyber-blue); /* يتحول إلى الأزرق السيبراني عند التمرير */
+            background: var(--bg-main);
+            box-shadow: 0 0 20px var(--cyber-blue-glow); /* توهج أزرق بارز */
+        }
+ 
+        /* القائمة الطولية للمسار المهني */
+        .timeline-vertical {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+ 
+        .timeline-vertical .glass-card {
+            width: 100%;
+        }
+ 
+        .timeline-date {
+            font-size: 8px;
+            margin-bottom: 8px;
+            color: var(--cyber-blue);
+            font-weight: 300;
+        }
+ 
+        /* تنظيم مهام الخبرة كأعمدة مستقلة تحت بعضها بدون نقاط تقليدية */
+        .timeline-desc-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-top: 5px;
+        }
+ 
+        .timeline-desc-list span {
+            display: block;
+            font-size: 11px;
+            color: var(--text-muted);
+            padding-right: 10px;
+            border-right: 2.5px solid var(--cyber-blue); /* خط توجيهي أزرق بدلاً من النقاط */
+            line-height: 1.5;
+        }
+ 
+        /* المربعات والشبكات للمشاريع */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+        }
+ 
+        /* STREAMING_CHUNK: Formatting grid certification and adaptive touch sizing... */
+        /* شبكة الشهادات المخصصة: عمودين متجاورين */
+        .grid-cert {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 12px;
+            position: relative;
+        }
+ 
+        /* مربعات الشهادات المحددة بمحاذاة وحركة */
+        .cert-node {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border: 1.5px solid var(--border-glass); /* تحديد زجاجي هادئ افتراضي */
+            padding: 12px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none; 
+            color: inherit;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            aspect-ratio: 1 / 1; /* يضمن شكل مربع مثالي 100% */
+            text-align: center;
+            box-shadow: 0 4px 10px var(--shadow-custom);
+            position: relative;
+            overflow: hidden;
+        }
+ 
+        .cert-node:hover {
+            border-color: var(--cyber-blue); /* يتحول إلى الأزرق عند التمرير */
+            background: var(--bg-main);
+            transform: translateY(-5px); 
+            box-shadow: 0 0 20px var(--cyber-blue-glow); /* توهج أزرق بارز */
+        }
+ 
+        .node-vendor {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--cyber-blue);
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+        }
+ 
+        /* STREAMING_CHUNK: Designing the Square Terminal Emulator inside Hero section with interactive flashing cursor... */
+        /* تصميم شاشة الـ Terminal كمربع صغير بدقة */
+        .terminal-window {
+            background-color: var(--terminal-bg);
+            border: 1.5px solid var(--cyber-blue);
+            border-radius: 9px;
+            overflow: hidden;
+            box-shadow: 8px 10px 20px var(--shadow-custom);
+            font-family: 'JetBrains Mono', monospace;
+            direction: ltr; /* نظام الـ CLI يعرض دائماً بالإنجليزية */
+            text-align: left;
+            width: 100%;
+            max-width: 400px;
+            aspect-ratio: 1 / 1; /* مربع مثالي */
+            display: flex;
+            flex-direction: column;
+            transition: border-color 0.4s ease;
+        }
+ 
+        .terminal-header {
+            background: rgba(15, 23, 42, 0.4);
+            padding: 8px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 6px;
+            border-bottom: 1px solid rgba(40, 100, 200, 0.15);
+            flex-shrink: 0;
+        }
+ 
+        .terminal-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+ 
+        .terminal-dot.red { background-color: #ef4444; }
+        .terminal-dot.yellow { background-color: #f59e0b; }
+        .terminal-dot.green { background-color: #10b981; }
+ 
+        .terminal-title {
+            color: var(--text-muted);
+            font-size: 11px;
+            margin-left: 5px;
+            font-weight: bold;
+        }
+ 
+        .terminal-body {
+            padding: 10px;
+            flex-grow: 1;
+            overflow-y: auto;
+            color: var(--terminal-text);
+            font-size: 12px;
+            line-height: 1.4;
+        }
+ 
+        .terminal-input-line {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            margin-top: 8px;
+        }
+ 
+        .terminal-prompt {
+            color: #4ade80;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+ 
+        /* تصميم المؤشر التفاعلي الوامض بجانب سطر الإدخال */
+        .terminal-prompt::after {
+            content: '▋';
+            color: #4ade80;
+            animation: pulse-cursor 0.8s step-start infinite;
+            margin-left: 3px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+ 
+        @keyframes pulse-cursor {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+ 
+        .terminal-input {
+            background: none;
+            border: none;
+            outline: none;
+            color: #ffffff;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            width: 100%;
+            caret-color: #4ade80; /* لون مؤشر الإدخال الأصلي متناسق */
+        }
+ 
+        .term-highlight {
+            color: #f43f5e; /* للتنبيهات أو الأوامر الهامة */
+            font-weight: bold;
+        }
+ 
+        /* STREAMING_CHUNK: Creating write-up modal designs for projects... */
+        /* تصميم النوافذ المنبثقة التفاعلية (Modals) لعرض التقارير الفنية */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 20;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+ 
+        .modal-window {
+            background: var(--bg-main);
+            border: 2px solid var(--cyber-blue);
+            border-radius: 16px;
+            max-width: 480px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 20px;
+            position: relative;
+            box-shadow: 0 10px 30px var(--cyber-blue-glow);
+            animation: modalScaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+ 
+        @keyframes modalScaleUp {
+            from { transform: scale(0.92); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+ 
+        .modal-close {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background: none;
+            border: 1px solid var(--border-glass);
+            color: var(--text-dark);
+            border-radius: 8px;
+            width: 34px;
+            height: 34px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s ease;
+        }
+ 
+        .modal-close:hover {
+            background-color: var(--cyber-blue);
+            color: white;
+            border-color: var(--cyber-blue);
+        }
+ 
+        .modal-tech-badge {
+            display: inline-block;
+            font-family: 'Space Grotesk', sans-serif;
+            background: rgba(2, 132, 199, 0.1);
+            color: var(--cyber-blue);
+            padding: 5px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+ 
+        .modal-body-content h3 {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            color: var(--cyber-blue);
+            border-bottom: 1px solid var(--border-glass);
+            padding-bottom: 6px;
+        }
+ 
+        .modal-body-content p {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+ 
+        /* STREAMING_CHUNK: Integrating fully responsive design configurations... */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 90px;
+            }
+            .hero-text {
+                align-items: center;
+                text-align: center;
+            }
+            .hero h1, .hero h2, .hero p {
+                text-align: center;
+            }
+            .cta-group {
+                justify-content: center;
+            }
+            .hero-image {
+                max-width: 240px; /* ضبط وتكبير الحجم التفاعلي التلقائي للأجهزة الصغيرة */
+            }
+            nav { display: none; }
+            .nav-container { padding: 15px 20px; }
+            .container { padding-left: 20px; padding-right: 20px; }
+        }
+ 
+        @media (max-width: 420px) {
+            .hero h1 {
+                font-size: 30px;
+            }
+            .hero-image {
+                max-width: 200px;
+            }
+            .grid-3, .grid-cert {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+ 
+        /* أزرار باللون الأزرق الجذاب وحركتها التفاعلية */
+        .cyber-btn {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--cyber-blue);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px var(--cyber-blue-glow);
+        }
+ 
+        .cyber-btn:hover {
+            background-color: #026ca3;
+            transform: scale(1.03); 
+            box-shadow: 0 6px 16px rgba(2, 132, 199, 0.4);
+        }
+ 
+        /* STREAMING_CHUNK: Formatting compact side-by-side contact layout... */
+        /* تنسيق التواصل لجهة اليمين بالكامل وبجانب بعضهما */
+        .contact-right-aligned {
+            text-align: right;
+            margin-top: 10px;
+        }
+ 
+        .contact-links-row {
+            display: inline-flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+ 
+        /* شارات تواصل مدمجة وأنيقة */
+        .contact-link-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Space Grotesk', 'Cairo', sans-serif;
+            font-size: 14px; /* حجم خط مدمج */
+            font-weight: 600;
+            text-decoration: none;
+            padding: 10px 20px; /* تقليص الحجم الداخلي */
+            border-radius: 8px;
+            border: 1.5px solid var(--border-glass);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+        }
+ 
+        .email-badge {
+            color: var(--cyber-blue);
+            background: var(--bg-card);
+        }
+ 
+        .email-badge:hover {
+            background: var(--cyber-blue);
+            color: white;
+            border-color: var(--cyber-blue);
+            box-shadow: 0 4px 15px var(--cyber-blue-glow);
+            transform: translateY(-2px);
+        }
+ 
+        .linkedin-badge {
+            color: white;
+            background-color: var(--cyber-blue);
+            border-color: var(--cyber-blue);
+        }
+ 
+        .linkedin-badge:hover {
+            background-color: #026ca3;
+            box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4);
+            transform: translateY(-2px);
+        }
+ 
+        .contact-icon {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+ 
+        footer {
+            border-top: 1px solid rgba(15, 23, 42, 0.08);
+            padding: 20px 10px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+ 
+    <!-- STREAMING_CHUNK: Header Navigation Rendering... -->
+    <!-- القائمة العلوية الثابتة -->
+    <header>
+        <div class="nav-container">
+            <!-- شريط التنقل بالإنجليزي - يمين -->
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#credentials">Credentials</a></li>
+                    <li><a href="#handshake">Contact</a></li>
+                </ul>
+                <!-- زر تبديل الثيم الفاخر -->
+                <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle Theme">
+                    <svg id="theme-icon-sun" class="hidden" viewBox="0 0 24 24">
+                        <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L17.3 16.95zm1.06-12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.38.39-1.02 0-1.41zm-12.37 12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.38.39-1.02 0-1.41z"/>
+                    </svg>
+                    <svg id="theme-icon-moon" viewBox="0 0 24 24">
+                        <path d="M12.3 22h-.1c-5.5 0-10-4.5-10-10C2.2 6.8 6.5 2.4 11.8 2c.5 0 .9.3 1 .8s-.1.9-.6 1.2C10 5.4 8.7 8.5 8.7 12c0 4.1 3.4 7.5 7.5 7.5 2.3 0 4.4-.1 6.1-3.1.3-.4.8-.6 1.3-.4.5.2.8.7.7 1.2-.9 2.8-3.6 4.8-12 4.8z"/>
+                    </svg>
+                </button>
+            </nav>
+ 
+            <!-- الاسم الصغير مع الأندر سكور - يسار -->
+            <div class="logo-container">LUJAIN<span class="blink-dot">_</span></div>
+        </div>
+    </header>
+ 
+    <!-- STREAMING_CHUNK: Hero Section Rendering with Terminal Simulator integrated on the left... -->
+    <!-- الواجهة الرئيسية (محاذاة يمين بالكامل مع شاشة الأوامر الفخمة المربعة على اليسار) -->
+    <section id="home" class="hero">
+        <div class="hero-text">
+            <div class="hero-badge">// SOC_NODE_ACTIVE</div>
+            <h1>Lujain</h1>
+            <h2>أخصائية أمن سيبراني ومحللة SOC</h2>
+            <p>
+                خبيرة في الدفاع الرقمي من خلال اكتشاف التهديدات، والاستجابة للحوادث، وحماية الأجهزة النهائية ضمن بنية SOC تحتية صحية حساسة. متمكنة من مراقبة أنظمة SIEM، وتحليل البرمجيات الخبيثة والملفات، والتحقيق في رسائل التصيد الاحتيالي، بتقييم الثغرات، وتنفيذ دورة الاستجابة للحوادث الكاملة من التحديد والاحتواء إلى الاستئصال والتعافي. لدي كفاءة عالية في تطبيق مبادرات تعزيز الأمان، وتقليل مساحة الهجوم المحتملة، وتقديم برامج التوعية الأمنية المتقدمة بنهج استباقي وقوي في الدفاع السيبراني.
+            </p>
+            <div class="cta-group">
+                <!-- تم ربط ملف الـ Google Drive الخاص بكِ هنا مباشرة -->
+                <a href="https://drive.google.com/file/d/1trFOcnkZhrxnRDNidcxn95EHprX1SrhN/view?usp=drive_link" target="_blank" class="cyber-btn">تحميل السيرة الذاتية (PDF)</a>
+            </div>
+        </div>
+        
+        <!-- استبدال الرادار بالـ Terminal التفاعلي على شكل مربع صغير أنيق ومؤشر وامض -->
+        <div class="hero-image">
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <span class="terminal-dot red"></span>
+                    <span class="terminal-dot yellow"></span>
+                    <span class="terminal-dot green"></span>
+                    <span class="terminal-title">lujain@security-node:~</span>
+                </div>
+                <div class="terminal-body" id="terminal-body">
+                    <!-- تصغير حجم خط الجملة السيبرانية الترحيبية وتخفيفها بشكل أنيق جداً -->
+                    <p style="color: #10b981; font-size: 11px; opacity: 0.9; letter-spacing: 0.5px;">[+] ACTIVE SEC_NODE INITIALIZED...</p>
+                    <p style="font-size: 11px; margin-top: 5px;">Type <span class="term-highlight">help</span> to begin.</p>
+                    <br>
+                    <div id="terminal-output"></div>
+                    <div class="terminal-input-line">
+                        <span class="terminal-prompt">lujain@secops:~$</span>
+                        <input type="text" id="terminal-input" class="terminal-input" placeholder="..." autocomplete="off" spellcheck="false">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+    <!-- STREAMING_CHUNK: Experience Section Rendering... -->
+    <!-- [1] الخبرة المهنية (مرتبة عمودياً كخط دفاعي وبدون فواصل) -->
+    <div class="container" id="experience">
+        <h2 class="section-header-tech">الخبرة المهنية</h2>
+        <div class="timeline-vertical">
+            
+            <!-- الخبرة 1 -->
+            <div class="glass-card">
+                <div class="timeline-date">يونيو 2026 — Jun 2026</div>
+                <h3 style="font-size: 13px; margin-bottom: 5px; color: var(--cyber-blue);">برنامج مسك STC - تحليل الاستجابة لحوادث الأمن السيبراني</h3>
+                <div class="timeline-desc-list">
+                    <span>محاكي الواقع العملي في مركز العمليات الأمنية (SOC).</span>
+                    <span>تحليل سجلات الـ SIEM وبناء لقطات الاستعلام باستخدام منصة Splunk.</span>
+                    <span>التحقيق الفني في رسائل التصيد الاحتيالي واعتراضها.</span>
+                    <span>التحليل الجنائي لرؤوس وجسد البريد الإلكتروني المشبوه.</span>
+                    <span>تفكيك وتحليل البرمجيات الخبيثة المرفقة بالاعتماد على أداة oledump.</span>
+                    <span>صياغة التقارير الفنية المتكاملة للحوادث السيبرانية المكتشفة.</span>
+                </div>
+            </div>
+            
+            <!-- الخبرة 2 -->
+            <div class="glass-card">
+                <div class="timeline-date">أكتوبر 2025 — Oct 2025</div>
+                <h3 style="font-size: 13px; margin-bottom: 5px; color: var(--cyber-blue);">الملتقى التقني</h3>
+                <div class="timeline-desc-list">
+                    <span>تطبيق إجراءات الدعم الفني وتنسيق الاستجابة للأجهزة الطرفية.</span>
+                    <span>تقنيات إدارة أنظمة الشبكات وتدفق البيانات الداخلية.</span>
+                    <span>تقنيات إدارة وتأمين قواعد البيانات الشاملة.</span>
+                    <span>بناء واجهات المستخدم وتوثيق الويب باستخدام HTML و CSS.</span>
+                </div>
+            </div>
+            
+            <!-- الخبرة 3 -->
+            <div class="glass-card">
+                <div class="timeline-date">أكتوبر 2024 — يناير 2015</div>
+                <h3 style="font-size: 13px; margin-bottom: 5px; color: var(--cyber-blue);">معسكر الأمن السيبراني — معهد آباد</h3>
+                <div class="timeline-desc-list">
+                    <span>برنامج تدريبي مكثف تخطى الـ 200 ساعة عمل وتوافق مع متطلبات Network+، Security+، Linux+، eJPT، BTL1.</span>
+                    <span>ممارسة المهارات العملية والأدوات الحية داخل بيئة تشغيل Linux الأمنية المتخصصة.</span>
+                    <span>تنفيذ محاكاة لتخمين واختبار جودة بيانات الاعتماد على المواقع باستخدام تقنيات قياسية.</span>
+                    <span>إجراء اختبارات اختراق بيئة محايدة ومحكومة عبر Metasploit لاستغلال ثغرات مخدمات Win 10 و Win 7.</span>
+                    <span>تحليل حركة تدفق الشبكة واصطياد الحزم باستخدام Wireshark واعتراض وتفكيك ملفات الهجمات.</span>
+                </div>
+            </div>
+ 
+            <!-- الخبرة 4 -->
+            <div class="glass-card">
+                <div class="timeline-date">ديسمبر 2023 — يونيو 2024</div>
+                <h3 style="font-size: 13px; margin-bottom: 5px; color: var(--cyber-blue);">أخصائي أمن سيبراني (تمهير) — مجمع إرادة والصحة النفسية</h3>
+                <div class="timeline-desc-list">
+                    <span>التدرب العملي وتطبيق السياسات الأمنية على أنظمة الحماية المعتمدة (COGGNA, Kaspersky).</span>
+                    <span>مراقبة وتتبع الملفات لمنع هجمات التصيد وتصفية البرمجيات الضارة قبل التأثير على الشبكة.</span>
+                    <span>تتبع التنبيهات الأمنية الحية عبر نظام مراقبة الأحداث SIEM وتقييم درجة الخطورة وبدء التصعيد.</span>
+                    <span>إدارة دورة حياة الاستجابة للحوادث بالكامل (التحديد، الاحتواء، الاستئصال، التعافي) لتقليص مساحات المخاطر.</span>
+                    <span>تصميم وبناء عروض توعوية موجهة للكادر الإداري والطبي لتقليل مخاطر الهندسة الاجتماعية.</span>
+                </div>
+            </div>
+ 
+            <!-- الخبرة 5 -->
+            <div class="glass-card">
+                <div class="timeline-date">يوليو — أغسطس 2023</div>
+                <h3 style="font-size: 13px; margin-bottom: 5px; color: var(--cyber-blue);">مجمع تداوي الطبي — ممثلة خدمة عملاء (تدريب تعاوني)</h3>
+                <div class="timeline-desc-list">
+                    <span>خبرة تطبيقية على نظام Kizen الطبي في تنظيم خدمات إدخال وتحديث سجلات المرضى على قواعد البيانات الصحية الداخلية، إدارة المكالمات الواردة لمركز الاتصال وتوجيه الاستفسارات لتسريع حل مشكلات المستفيدين.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+    <!-- STREAMING_CHUNK: Projects Section Rendering with Writeups triggers... -->
+    <!-- [2] أبرز المشاريع -->
+    <div class="container" id="projects">
+        <h2 class="section-header-tech">أبرز المشاريع والمهام الدفاعية</h2>
+        <div class="grid-3">
+            
+            <div class="glass-card">
+                <div style="font-size: 9px; font-weight: 600; color: var(--cyber-blue); text-transform: uppercase; margin-bottom: 3px;">Project 01 //</div>
+                <h3 style="font-size:11px; margin-bottom: 8px;">تطبيق I AM HERE</h3>
+                <p style="font-size: 9px; color: var(--text-muted); margin-bottom: 9px;">
+                    مشروع تخرج نوعي لتصميم تطبيق جوال يعتمد على محددات الـ GPS وقواعد بيانات SQL لإرشاد الطلاب والمنسوبين للغرف الحيوية والقاعات بكفاءة عالية وبناء الواجهات بـ JavaScript.
+                </p>
+                <!-- تم تفعيل الرابط لفتح تقرير تفاعلي مدمج فخم -->
+                <a href="https://drive.google.com/file/d/1FDpx0FkeNRJqoF_-WQPMQqFf3jqXGk9Y/view?usp=sharing" onclick="openProjectModal('project1')" style="font-size: 8px; color: var(--cyber-blue); text-decoration: none; font-weight: 700;">عرض ↗</a>
+            </div> 
+            
+            <div class="glass-card">
+                <div style="font-size: 9px; font-weight: 600; color: var(--cyber-blue); text-transform: uppercase; margin-bottom: 3px;">Project 02 //</div>
+                <h3 style="font-size: 11px; margin-bottom: 8px;">شهادة شكر وتقدير</h3>
+                <p style="font-size: 9px; color: var(--text-muted); margin-bottom: 9px;">
+                    حاصلة على تكريم من إدارة مجمع إرادة والصحة النفسية لتطوير وبناء نظام جدولة وحصر إلكتروني مطور بالكامل عبر Excel لإدارة المهام بكفاءة دفاعية داخل المجمع.
+                </p>
+                <!-- تم تفعيل الرابط لفتح تقرير تفاعلي مدمج فخم -->
+                <a href="https://drive.google.com/file/d/1srXUAd2RqCBRidSEksZTBePKZQw-8mbi/view?usp=sharing" onclick="openProjectModal('project2')" style="font-size: 8px; color: var(--cyber-blue); text-decoration: none; font-weight: 700;">عرض التوثيق ↗</a>
+            </div>
+ 
+            <div class="glass-card">
+                <div style="font-size: 9px; font-weight: 600; color: var(--cyber-blue); text-transform: uppercase; margin-bottom: 3px;">Project 03 //</div>
+                <h3 style="font-size: 11px; margin-bottom: 8px;">TryHackMe - HackTheBox</h3>
+                <p style="font-size: 9px; color: var(--text-muted); margin-bottom: 9px;">
+                    إتمام حل وتأمين 22 غرفة حية على منصات التدريب السيبراني العالمية، بما يعادل أكثر من 40 ساعة من الممارسات الجنائية والأمنية الهجومية والدفاعية التفاعلية.
+                </p>
+                <!-- تم تفعيل الرابط لفتح تقرير تفاعلي مدمج فخم -->
+                <a href="https://tryhackme.com/p/L.9" onclick="openProjectModal('project3')" style="font-size: 8px; color: var(--cyber-blue); text-decoration: none; font-weight: 700;">استعراض الحساب  ↗</a>
+            </div>
+ 
+        </div>
+    </div>
+ 
+    <!-- STREAMING_CHUNK: Rendering the Credentials section... -->
+    <!-- [3] الشهادات الاحترافية (مربعة الشكل ومنظمة بـعمودين صافيين ومميزين) -->
+    <div class="container" id="credentials">
+        <h2 class="section-header-tech">الشهادات الاحترافية والاعتمادات الرقمية</h2>
+        
+        <div class="grid-cert">
+            
+             <a harf="" target="_blank" class="cert-node">
+                <div>
+                    <div class="node-vendor">07//2026</div>
+                    <h3 style="font-size: 11px;">eCIR v2 – Incident Responder INE (In progress)</h3>
+                </div>
+            </a>
+            
+            <a href="https://drive.google.com/file/d/18Tknr3zL2gxGjEa5492Hhkd3EVzs2MmO/view?usp=sharing" target="_blank" class="cert-node">
+                <div>
+                    <div class="node-vendor">06//2025</div>
+                    <h3 style="font-size: 11px;">BTL1 – Security Blue Team (Course)</h3>
+                </div>
+            </a>
+ 
+            <a href="https://certs.ine.com/51bd518d-745f-4d64-926d-f7b3c25efbef#acc.DvAaE1S2" target="_blank" class="cert-node">
+                <div>
+                    <div class="node-vendor">05//2025</div>
+                    <h3 style="font-size: 11px;">eJPT v2 – Junior Penetration Tester INE </h3>
+                </div>
+            </a>
+ 
+            <a href="https://cp.certmetrics.com/comptia/en/public/verify/credential/0WX7MDXQ5EEQQKK3" target="_blank" class="cert-node">
+                <div>
+                    <div class="node-vendor">04//2025</div>
+                    <h3 style="font-size: 11px;">CompTIA Network+ (N10-009)</h3>
+                </div>
+            </a>
+ 
+            <a href="https://www.certiport.com/portal/Pages/PrintTranscriptInfo.aspx?action=Cert&id=247&cvid=0AHIFJM7Hjo6zN0oVCv7dw==" target="_blank" class="cert-node">
+                <div>
+                    <div class="node-vendor">03//2024</div>
+                    <h3 style="font-size: 11px;">Digital Literacy Certification (IC3) Certiport</h3>
+                </div>
+            </a>
+ 
+            <a href="https://www.certiport.com/portal/Pages/PrintTranscriptInfo.aspx?action=Cert&id=420&cvid=bBPmOdEfbEqaO5VvyXkqEw==" target="_blank" class="cert-node">
+                <div>
+                    <div class="node-vendor">cert 9//2024</div>
+                    <h3 style="font-size: 11px;">Excel 2019 Specialist (MOS) Microsoft</h3>
+                </div>
+            </a>
+ 
+            <a href="https://drive.google.com/file/d/16WCjKIDQ8F_jrXNhHkW3RmqTTwaLYUWu/view?usp=sharing" target="_blank" class="cert-node">
+                <div>
+                    <div class="node-vendor">01//2024</div>
+                    <h3 style="font-size: 11px;">Certified in Cybersecurity (CC) ISC2</h3>
+                </div>
+            </a>
+ 
+        </div>
+    </div>
+ 
+    <!-- STREAMING_CHUNK: Contact and Handshake Section aligned and formatted side-by-side... -->
+    <!-- الاتصال والتواصل الممركز (محاذي بالكامل لليمين مع روابط مدمجة ومجاورة لبعضها) -->
+    <div class="container" id="handshake">
+        <div class="contact-box contact-right-aligned">
+            <h2 class="section-header-tech" style="margin-bottom: 15px;">للاتصال والتواصل</h2>
+            <p style="font-size: 14px; color: var(--text-muted); font-weight: 600;">متاحة للأدوار الأمنية والتكتيكية في المنظمات والشبكات المؤسسية النشطة.</p>
+            
+            <!-- أزرار التواصل بجانب بعضها بشكل مرتب وصغير وفاخر -->
+            <div class="contact-links-row">
+                <a href="mailto:LujainShafee@gmail.com" class="contact-link-badge email-badge" title="ارسال بريد إلكتروني فوري">
+                    <svg class="contact-icon" viewBox="0 0 24 24">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                    LujainShafee@gmail.com
+                </a>
+                <a href="https://www.linkedin.com/in/lujainzsjobs" target="_blank" class="contact-link-badge linkedin-badge" title="عرض الحساب الرسمي">
+                    <svg class="contact-icon" viewBox="0 0 24 24">
+                        <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                    </svg>
+                    LinkedIn
+                </a>
+            </div>
+        </div>
+    </div>
+ 
+    <!-- STREAMING_CHUNK: Structuring the Project Modals... -->
+    <!-- شاشة الـ Modals المنبثقة التفاعلية للمشاريع -->
+    <div class="modal-overlay" id="project-modal" onclick="closeProjectModal(event)">
+        <div class="modal-window" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeProjectModal(null)">✕</button>
+            <div id="modal-content-area" class="modal-body-content">
+                <!-- يتم تعبئة المحتوى ديناميكياً بـ JavaScript -->
+            </div>
+        </div>
+    </div>
+ 
+    <!-- تذييل الصفحة -->
+    <footer>
+        <p>.جميع الحقوق محفوظة © لجين شافعي 2026</p>
+    </footer>
+ 
+    <!-- STREAMING_CHUNK: Writing Javascript logic for Boot-up system, Terminal and Modals... -->
+    <script>
+        // 1. نظام إقلاع ووميض الثيم الفاخر (System Boot-up Flash effect)
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('theme-icon-sun');
+        const moonIcon = document.getElementById('theme-icon-moon');
+ 
+        window.addEventListener('DOMContentLoaded', () => {
+            // تأثير وميض إقلاع النظام: يبدأ مظلماً ثم يومض عائداً للثيم الفاتح الطبيعي بعد 1.2 ثانية
+            setTimeout(() => {
+                document.documentElement.removeAttribute('data-theme');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            }, 1200); 
+        });
+ 
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            }
+        });
+ 
+        // 2. محاكي الـ Linux SOC Terminal التفاعلي
+        const terminalInput = document.getElementById('terminal-input');
+        const terminalOutput = document.getElementById('terminal-output');
+        const terminalBody = document.getElementById('terminal-body');
+ 
+        const commands = {
+            help: `Available Commands:<br>
+                   - <span class="term-highlight">about</span> : Introduction.<br>
+                   - <span class="term-highlight">skills</span>: Security toolkit.<br>
+                   - <span class="term-highlight">matrix</span>: Start digital rain.<br>
+                   - <span class="term-highlight">contact</span>: Contact details.<br>
+                   - <span class="term-highlight">clear</span>  : Clear console.`,
+            about: `L.99.9 <br>
+                    Defending digital systems with strong capabilities in threat detection, incident containment, network forensic packet analysis, and email phishing triaging.`,
+            skills: `Technical Tools & Skills:<br>
+                     - [SIEM Platforms] Splunk, Elastic Security, Log Monitoring.<br>
+                     - [Endpoint Security] Kaspersky Security Center, COGGNA, EDR.<br>
+                     - [Forensics & Capture] Wireshark, oledump, Network packet inspection.<br>
+                     - [Core Systems] Linux CLI administration, Windows Server Active Directory, Python basics.`,
+            contact: `Email: <a href="mailto:LujainShafee@gmail.com" style="color:#10b981;">LujainShafee@gmail.com</a><br>
+                      LinkedIn: <a href="https://www.linkedin.com/in/lujainzsjobs" target="_blank" style="color:#10b981;">linkedin.com/in/lujainzsjobs</a>`,
+            matrix: `Initiating Matrix Rain Simulation... [Press clear to clear]<br>`
+        };
+ 
+        // دالة هطول مصفوفة الأكواد الرقمية (Matrix Rain) داخل سطر الأوامر
+        let matrixInterval = null;
+        function startMatrixSimulation() {
+            clearInterval(matrixInterval);
+            let lines = 0;
+            matrixInterval = setInterval(() => {
+                let randomBinaryLine = "";
+                for(let i=0; i<30; i++) {
+                    randomBinaryLine += Math.random() > 0.5 ? "1" : "0";
+                    if(Math.random() > 0.8) randomBinaryLine += " ";
+                }
+                const p = document.createElement('p');
+                p.style.color = '#10b981';
+                p.style.opacity = '0.7';
+                p.textContent = randomBinaryLine;
+                terminalOutput.appendChild(p);
+                terminalBody.scrollTop = terminalBody.scrollHeight;
+                lines++;
+                if(lines > 25) clearInterval(matrixInterval); // ينهي تلقائياً بعد ٢٥ سطر
+            }, 80);
+        }
+ 
+        terminalInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const cmdText = terminalInput.value.trim().toLowerCase();
+                terminalInput.value = '';
+ 
+                // طباعة الأمر المدخل أولاً
+                const promptLine = document.createElement('p');
+                promptLine.innerHTML = `<span style="color:#10b981;font-weight:bold;">lujain@secops:~$</span> ${cmdText}`;
+                terminalOutput.appendChild(promptLine);
+ 
+                if (cmdText === 'clear') {
+                    terminalOutput.innerHTML = '';
+                    clearInterval(matrixInterval);
+                } else if (cmdText === 'matrix') {
+                    startMatrixSimulation();
+                } else if (commands[cmdText]) {
+                    const resultLine = document.createElement('p');
+                    resultLine.innerHTML = commands[cmdText];
+                    terminalOutput.appendChild(resultLine);
+                } else if (cmdText !== '') {
+                    const errorLine = document.createElement('p');
+                    errorLine.innerHTML = `<span class="term-highlight">Command not found: ${cmdText}</span>. Type <span class="term-highlight">help</span>.`;
+                    terminalOutput.appendChild(errorLine);
+                }
+ 
+                terminalBody.scrollTop = terminalBody.scrollHeight;
+            }
+        });
+ 
+ 
+ 
+        function openProjectModal(projectId) {
+            if (projectDetails[projectId]) {
+                modalContentArea.innerHTML = projectDetails[projectId];
+                modalOverlay.style.display = 'flex';
+                document.body.style.overflow = 'hidden'; // منع السكرول أثناء فتح المودال
+            }
+        }
+ 
+        function closeProjectModal(event) {
+            // إغلاق في حال الضغط على الخلفية أو زر الإغلاق
+            if (event === null || event.target === modalOverlay) {
+                modalOverlay.style.display = 'none';
+                document.body.style.overflow = 'auto'; // إعادة السكرول لطبيعته
+            }
+        }
+    </script>
+</body>
+</html>
