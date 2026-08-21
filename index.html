@@ -598,6 +598,110 @@
             margin-bottom: 8px;
         }
  
+        /* STREAMING_CHUNK: Desktop scaling — widen containers and bump up the mobile-sized type for larger screens... */
+        @media (min-width: 1024px) {
+            .container {
+                max-width: 980px;
+                padding: 40px 20px;
+            }
+
+            .nav-container, .hero {
+                max-width: 1180px;
+            }
+
+            .hero {
+                gap: 70px;
+                padding-top: 130px;
+            }
+
+            .hero h1 {
+                font-size: 96px;
+            }
+
+            .hero h2 {
+                font-size: 19px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .hero-image {
+                max-width: 380px;
+            }
+
+            .hero-badge {
+                font-size: 11px;
+            }
+
+            .section-header-tech {
+                font-size: 18px;
+            }
+
+            .timeline-date {
+                font-size: 11px;
+            }
+
+            .timeline-desc-list span {
+                font-size: 13px;
+            }
+
+            .glass-card {
+                padding: 22px;
+            }
+
+            .glass-card h3 {
+                font-size: 16px !important;
+            }
+
+            .grid-3 {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+            }
+
+            .grid-3 .glass-card div[style*="font-size: 9px"] {
+                font-size: 11px !important;
+            }
+
+            .grid-3 .glass-card h3 {
+                font-size: 14px !important;
+            }
+
+            .grid-3 .glass-card p[style*="font-size: 9px"] {
+                font-size: 12px !important;
+            }
+
+            .grid-3 .glass-card a[style*="font-size: 8px"] {
+                font-size: 11px !important;
+            }
+
+            .grid-cert {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 18px;
+            }
+
+            .cert-node {
+                padding: 18px;
+            }
+
+            .cert-node h3 {
+                font-size: 13px !important;
+            }
+
+            .node-vendor {
+                font-size: 12px;
+            }
+
+            .contact-right-aligned p[style*="font-size: 10px"] {
+                font-size: 13px !important;
+            }
+
+            .contact-link-badge {
+                font-size: 15px;
+                padding: 12px 24px;
+            }
+        }
+
         /* STREAMING_CHUNK: Integrating fully responsive design configurations... */
         @media (max-width: 768px) {
             .hero {
